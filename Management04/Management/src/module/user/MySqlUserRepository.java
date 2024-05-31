@@ -108,6 +108,14 @@ public class MySqlUserRepository implements UserRepository{
 
     @Override
     public User update(User user) {
+        try {
+            Connection connection = DriverManager.getConnection(MYSQL_CONNECTION, MYSQL_USER, MYSQL_PASSWORD);
+            String SQL_String = "";
+            
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return null;
     }
 
