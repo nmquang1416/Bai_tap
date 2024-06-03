@@ -101,7 +101,8 @@ public class MySqlUserRepository implements UserRepository{
             System.out.println("success");
             connection.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Có lỗi xảy ra, vui lòng thử lại sau.");
+            e.printStackTrace();
         }
         return user;
     }
@@ -125,7 +126,8 @@ public class MySqlUserRepository implements UserRepository{
             System.out.println("success");
             connection.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Có lỗi xảy ra, vui lòng thử lại sau.");
+            e.printStackTrace();
         }
         return user;
     }
@@ -141,7 +143,8 @@ public class MySqlUserRepository implements UserRepository{
             preparedStatement.execute();
             System.out.println("success delete");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Có lỗi xảy ra, vui lòng thử lại sau.");
+            e.printStackTrace();
         }
     }
 }
