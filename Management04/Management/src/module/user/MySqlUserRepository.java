@@ -110,17 +110,38 @@ public class MySqlUserRepository implements UserRepository{
     public User update(User user) {
         try {
             Connection connection = DriverManager.getConnection(MYSQL_CONNECTION, MYSQL_USER, MYSQL_PASSWORD);
-            String SQL_String = "";
+            String SQL_String = "update users set username = ?, password = ?, full_name= ?, identity_card = ?, phone = ?, dob = ?, status = ? where id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_String);
 
+            preparedStatement.setString(1, user.getUserName());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getFullName());
+            preparedStatement.setString(4, user.getIdentityCard());
+            preparedStatement.setString(5, user.getPhone());
+            preparedStatement.setString(6, user.getDob().toString());
+            preparedStatement.setInt(7, user.getStatus());
+            preparedStatement.setLong(8, user.getId());
+            preparedStatement.execute();
+            System.out.println("success");
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        return null;
+        return user;
     }
 
     @Override
     public void deleteById(long id) {
+        try {
+            Connection connection = DriverManager.getConnection(MYSQL_CONNECTION, MYSQL_USER, MYSQL_PASSWORD);
+            String SQL_String = "update users set status = -1 where id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_String);
 
+            preparedStatement.setLong(1, id);
+            preparedStatement.execute();
+            System.out.println("success delete");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
